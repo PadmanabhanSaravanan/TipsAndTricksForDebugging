@@ -18,12 +18,9 @@
 * [**Flag Threads and Run Flagged Threads to Cursor**](#flag-threads-and-run-flagged-threads-to-cursor) <!-- style="font-size:20px" --> 
 * [**Show Threads in source**](#show-threads-in-source) <!-- style="font-size:20px" -->
 * [**Debug Location toolbar**](#debug-location-toolbar) <!-- style="font-size:20px" -->
-* [**Debugging Heap Corruption with Page Heap**](#debugging-heap-corruption-with-page-heap) <!-- style="font-size:20px" -->
-* [**PerfTips**](#perftips) <!-- style="font-size:20px" -->
 * [**Integrated CPU profiling**](#integrated-cpu-profiling) <!-- style="font-size:20px" -->
 * [**Integrated Memory Profiling**](#integrated-memory-profiling) <!-- style="font-size:20px" -->
-* [**Natvis**](#natvis) <!-- style="font-size:20px" -->
-* [**Showing what source code causes an Access Violation**](#showing-what-source-code-causes-an-access-violation) <!-- style="font-size:20px" -->
+
 
 ### **Configuring launch options from project properties [command line arguments and setting environment variables]**
 
@@ -138,7 +135,7 @@ You can configure these settings for all exceptions, or you can expand the nodes
 
 In this example it throws integer divison by zero , select the exception and start debugging session.
 
-![image](image/img8.png)
+![image](image/img8.PNG)
 
 ![image](image/img9.PNG)
 
@@ -146,31 +143,216 @@ In this example it throws integer divison by zero , select the exception and sta
 
 Visual Studio provides powerful features for controlling breakpoints, which are essential in debugging. These features include conditional breakpoints, hit count breakpoints, and filter breakpoints.
 
-**1. Conditional Breakpoints**: A conditional breakpoint is only triggered when a specified condition is met. For example, you can set a breakpoint to be hit only when a certain variable equals a particular value. To set a conditional breakpoint:
+* [**Conditional Breakpoints**](#conditional-breakpoints)
+* [**Hit Count Breakpoints**](#hit-count-breakpoints)
+* [**Filter Breakpoints**](#filter-breakpoints)
+
+#### **Conditional Breakpoints** 
+
+A conditional breakpoint is only triggered when a specified condition is met. For example, you can set a breakpoint to be hit only when a certain variable equals a particular value. 
+
+To set a conditional breakpoint:
 
 * Right-click on an existing breakpoint (the red dot in the left margin).
 * Select "Conditions".
-* Choose either "Conditional Expression" or "Hit Count" (explained below) and enter the appropriate condition.
+* Choose "Conditional Expression" and enter the appropriate condition.
 * Click "Close".
 
-Hit Count Breakpoints: A hit count breakpoint is a type of conditional breakpoint that only triggers when it has been hit a specified number of times. This can be useful in situations such as when you're working with loops or recurring method calls. To set a hit count breakpoint:
+![image](image/img10.PNG)
 
-Right-click on an existing breakpoint.
-Select "Conditions".
-Choose "Hit Count" and then specify the count condition (for example, break when the hit count is "equal to" a certain number, "a multiple of" a certain number, etc.).
-Click "Close".
+#### **Hit Count Breakpoints** 
+
+A hit count breakpoint is a type of conditional breakpoint that only triggers when it has been hit a specified number of times. This can be useful in situations such as when you're working with loops or recurring method calls.
+
+To set a hit count breakpoint:
+
+* Right-click on an existing breakpoint.
+* Select "Conditions".
+* Choose "Hit Count" and then specify the count condition (for example, break when the hit count is "equal to" a certain number, "a multiple of" a certain number, etc.).
+* Click "Close".
+
+![image](image/img11.PNG)
+
+#### **Filter Breakpoints**
+
+Filter breakpoints allow you to narrow down even further by specifying that the breakpoint should only be hit for certain threads, processes, or machine names. This is especially useful when debugging multi-threaded or distributed applications. 
+
+To set a filter breakpoint:
+
+* Right-click on an existing breakpoint.
+* Select "Filter".
+* Specify the filter condition (for example, MachineName = "MyServer" or ThreadId = 3).
+* Click "Close".
+
+![image](image/img12.PNG)
 
 ### **Pinning DataTips**
+
+DataTips are a type of debugging tool provided by Visual Studio that show the value of variables when you hover over them in the code editor while debugging. They are essentially tooltips for your data.
+
+**Pinning DataTips**: You can pin DataTips to your code window, so they remain visible as you move around in your code. This can be helpful if you want to keep track of how specific values change as your code executes.
+
+To pin a DataTip, follow these steps:
+
+**Start Debugging**: Start a debugging session by clicking "Debug" from the menu and then "Start Debugging", or pressing F5.
+**Pause Execution**: Pause execution at a breakpoint or manually pause the program from the Debug menu.
+**Hover over a Variable**: Hover over a variable to display a DataTip showing its current value.
+**Pin the DataTip**: Click the pin icon on the left side of the DataTip to pin it to your code window.
+
+Once a DataTip is pinned, it will stay visible even if you move your cursor away. You can move a pinned DataTip by dragging it, and you can unpin it by clicking the pin icon again.
+
+Pinned DataTips will also appear in future debugging sessions at the same location, which can be very useful when you're repeatedly debugging the same code.
+
+![image](image/img13.PNG)
+
 ### **Parallel Stacks window**
+
+The Parallel Stacks window in Visual Studio provides a graphical view of all call stacks for all your threads at the same time. It can be a very powerful tool when debugging multi-threaded applications, as it helps you understand the state of your application and how the execution of different threads interrelates.
+
+The Parallel Stacks window provides two views: "Threads" and "Tasks" (for parallel tasks in .NET). In both views, each box represents a function call, and each column represents a thread or task. An arrow represents a function call, pointing from the caller to the callee.
+
+**To use the Parallel Stacks window:**
+
+* **Start Debugging**: Begin a debugging session by clicking "Debug" on the menu and then "Start Debugging", or pressing F5.
+* **Pause Execution**: Pause execution at a breakpoint or manually pause the program from the Debug menu.
+* **Open the Parallel Stacks Window**: Click "Debug" on the menu, then "Windows", then "Parallel Stacks". You can also use the keyboard shortcut Ctrl + Shift + D, S.
+
+By default, the Parallel Stacks window shows the "Threads" view. If you're debugging a .NET application and want to see the "Tasks" view, click on the "Tasks" button at the top of the window.
+
+**In the Parallel Stacks window, you can:**
+
+* **View the call stack of each thread or task**: Each box in the diagram represents a function call. The box at the top of each column represents the current function for that thread or task.
+* **Switch to a different thread or task**: Click on a box in the diagram to switch to that function call in that thread or task. The source code window will update to show the corresponding source code.
+* **See where threads or tasks are executing the same function**: If multiple threads or tasks are executing the same function, they will be grouped together under a single box.
+
+The Parallel Stacks window can help you understand complex threading and synchronization issues in your code, such as deadlocks or race conditions. It's a great tool for visualizing the state of your multi-threaded application.
+
+![image](image/img14.PNG)
+
 ### **Show External Code**
+
+The "Show External Code" option in Visual Studio allows you to see frames from external, system, and third-party code in the Call Stack window when you're debugging. This feature can be useful when you're trying to understand the sequence of function calls that led to the current location, including calls made into libraries or system code.
+
+To toggle the "Show External Code" feature:
+
+* **Start Debugging**: Begin a debugging session by clicking "Debug" on the menu and then "Start Debugging", or pressing F5.
+* **Pause Execution**: Pause execution at a breakpoint or manually pause the program from the Debug menu.
+* **Open the Call Stack Window**: Click "Debug" on the menu, then "Windows", then "Call Stack". Alternatively, you can use the keyboard shortcut Ctrl + Alt + C.
+* **Toggle "Show External Code"**: Right-click anywhere in the Call Stack window, and click on "Show External Code" in the context menu that appears.
+
+When the "Show External Code" option is enabled, the Call Stack window will show all function calls, including those in external code. When it's disabled, the Call Stack window will only show calls in your own code, and it will collapse calls in external code into "[External Code]" frames.
+
+![image](image/img15.PNG)
+
 ### **Parallel Watch window**
+
+The Parallel Watch window in Visual Studio is an advanced tool for observing the values of variables across multiple threads or tasks when you are debugging. It gives you the ability to compare the value of a variable or an expression for all threads or tasks at once, which can be extremely useful in multithreaded or parallel programming.
+
+**To use the Parallel Watch window:**
+
+* **Start Debugging**: Begin a debugging session by clicking "Debug" on the menu and then "Start Debugging", or pressing F5.
+* **Pause Execution**: Pause execution at a breakpoint or manually pause the program from the Debug menu.
+* **Open the Parallel Watch Window**: Click "Debug" on the menu, then "Windows", then "Parallel Watch". You will see multiple Parallel Watch windows (Parallel Watch 1, Parallel Watch 2, etc.), which allows you to watch different variables or expressions in each window.
+
+In the Parallel Watch window, each row represents a different thread or task, and each column represents a different watch expression. The values of the watch expressions are displayed for each thread or task, allowing you to see how the values vary across different execution contexts.
+
+By right-clicking in the window, you can add or modify watch expressions, refresh the values, or change the view between threads and tasks. You can also control which threads or tasks are shown by using the "Show Threads in Category" or "Show Tasks in Category" options.
+
+![image](image/img16.PNG)
+
 ### **Freeze and Thaw threads**
+
+When debugging multi-threaded applications in Visual Studio, you might find it helpful to control the execution of individual threads independently. You can do this by freezing and thawing threads.
+
+Freezing a thread suspends its execution, allowing other threads to run freely. This can be useful when you want to prevent a particular thread from making further progress for some time. For example, you might freeze a thread to prevent it from acquiring a lock or changing a shared variable.
+
+Thawing a thread, on the other hand, resumes its execution if it was previously frozen.
+
+Here's how you can freeze and thaw threads in Visual Studio:
+
+* **Start Debugging**: Begin a debugging session by clicking "Debug" on the menu and then "Start Debugging", or pressing F5.
+* **Pause Execution**: Pause execution at a breakpoint or manually pause the program from the Debug menu.
+* **Open the Threads Window**: Click "Debug" on the menu, then "Windows", then "Parallel Watch".
+* **Freeze or Thaw a Thread**: In the Parallel Watch window, right-click on the thread you want to freeze or thaw. Then, select "Freeze" to suspend the thread's execution, or "Thaw" to resume the thread's execution.
+
+Please note that freezing a thread won't prevent it from holding locks. So, if other threads are waiting on a lock held by a frozen thread, they will be blocked until you thaw the frozen thread.
+
+![image](image/img17.png)
+
 ### **Flag Threads and Run Flagged Threads to Cursor**
+
+**Flagging a Thread**
+
+You might have several threads in your application, but often, you're only interested in one or a few threads. By flagging a thread, you mark it as important so that it stands out from other threads. Here's how you can flag a thread:
+
+* Start debugging and pause execution.
+* Click "Debug" on the menu, then "Windows", then "Parallel Watch".
+* In the Parallel Watch window, right-click on the thread you want to flag and select "Flag" from the context menu.
+* Flagged threads are indicated by a flag icon in the Threads window. You can also view all flagged threads by choosing "Flagged Threads" from the "Debug Location" toolbar.
+
+![image](image/img19.png)
+
+* **Running Flagged Threads to Cursor** 
+
+Once you have flagged a thread, you can run just that thread to the cursor. This allows you to advance execution for a specific thread while leaving others paused. Here's how you can run a flagged thread to the cursor:
+
+* Place the cursor at the line of code where you want the execution to advance to.
+* Right-click on the line of code and select "Run Flagged Threads to Cursor" from the context menu.
+
+![image](image/img18.png)
+
+By flagging threads and running flagged threads to a cursor, you can focus on the threads that matter most to you and better manage the complexity of multithreaded debugging.
+
 ### **Show Threads in source**
+
+"Show Threads in Source" is a very useful feature in Visual Studio that helps when debugging multithreaded applications. It shows you the locations of all your threads in your source code directly, giving you a clear picture of the execution state of each thread.
+
+When this option is enabled, markers for each thread are displayed in the scrollbar and next to the code lines in the text editor. Each marker includes the thread ID and the thread name (if it has one). If you hover over a marker, a tooltip shows more information about the thread.
+
+These markers can help you understand which parts of your code are being executed by which threads at any given point in time, helping you debug more effectively. It's especially useful for visualizing race conditions, deadlocks, and other complex multithreading issues.
+
+![image](image/img20.png)
+
 ### **Debug Location toolbar**
-### **Debugging Heap Corruption with Page Heap**
-### **PerfTips**
+
+The Debug Location toolbar in Visual Studio is a handy tool that provides context about your current debugging session, like the current process, thread, and stack frame. It also allows you to quickly navigate through these.
+
+Here's a brief overview of what you'll typically find on the Debug Location toolbar:
+
+* **Process List**: If you're debugging more than one process (like in a multi-process application), this dropdown list allows you to switch between them.
+* **Thread List**: This dropdown list lets you switch between the different threads in your application. Threads can be named or unnamed, and this list shows the thread ID, the location where it's currently broken (if applicable), and any flags.
+* **Stack Frame List**: This dropdown list shows the call stack for the current thread. You can select a different stack frame to change the debugging context. This changes the highlighted code in the source window and updates the contents of the Locals, Autos, and Watch windows.
+* **Step Into Context**: If the line of code at the current instruction pointer calls into other functions, you can select which function you want to step into from this dropdown list.
+* **Flagged Threads and Flag/Unflag Thread**: These controls let you manage thread flags. You can quickly navigate to flagged threads, or flag/unflag the current thread.
+* **Show Next Statement**: Clicking this will navigate the source window to the current instruction pointer (the next statement that will be executed).
+* **Show Threads in Source**: When this is enabled, markers are shown in the source window for each location that is on a call stack of any thread.
+* **Show External Code**: When this is enabled, the call stack includes entries for external code.
+
+![image](image/img21.png)
+
 ### **Integrated CPU profiling**
+
+ Visual Studio provides integrated CPU profiling capabilities via the Performance Profiler, which allows you to investigate CPU usage in your applications. It helps you identify portions of code that consume more CPU resources and might be potential candidates for optimization.
+
+Here's a brief guide on how to use the integrated CPU profiling:
+
+* **Open the Performance Profiler**: You can open the Performance Profiler by going to "Debug" -> "Performance Profiler...", or by using the shortcut Alt + F2.
+* **Choose CPU Usage Tool**: In the Performance Profiler, make sure the "CPU Usage" tool is selected. You can select other tools as well depending on your profiling needs.
+* **Start Profiling**: Click "Start" to run your application and begin profiling. Use your application as normal, and try to perform the tasks that you suspect might be causing CPU performance issues.
+* **Stop Profiling**: When you're done, stop the application, or click "Stop collection" in the Performance Profiler. Visual Studio will then process the profiling data and display the results.
+
+In the CPU Usage tool's results, you'll see a timeline of CPU usage, and a list of functions sorted by their CPU usage. You can explore this data to identify areas of high CPU usage. Clicking on a function will show you its "Caller/Callee" view, where you can see which functions called this function, and which functions it called, along with their CPU usage.
+
 ### **Integrated Memory Profiling**
-### **Natvis**
-### **Showing what source code causes an Access Violation**
+
+Visual Studio provides an integrated Memory Profiler, which is part of its Performance Profiler tools. The Memory Profiler tool allows you to investigate memory usage in your applications, helping you to identify any potential memory leaks or areas of inefficient memory use.
+
+Here's how to use the integrated Memory Profiling:
+
+* **Open the Performance Profiler**: Go to "Debug" -> "Performance Profiler..." or use the shortcut Alt + F2.
+* **Choose .NET Memory Tool**: In the Performance Profiler, ensure the ".NET Memory" tool is selected. Note that this tool is only applicable for .NET applications.
+* **Start Profiling**: Click "Start" to run your application and begin profiling. Use your application as you normally would, particularly focusing on actions you suspect may cause high memory usage or memory leaks.
+* **Take Snapshots**: While your application is running, you can take memory snapshots at any point by clicking on "Take snapshot" in the Performance Profiler. These snapshots capture the state of the managed heap, letting you analyze memory usage in detail.
+* **Stop Profiling**: Once you have finished, stop your application or click "Stop collection" in the Performance Profiler. Visual Studio will then process the profiling data and display the results.
+
+The Memory Profiler will provide a graphical representation of memory usage over time. Snapshots taken during the profiling session can be examined in detail to review the objects present on the heap and the memory they are consuming. By comparing two snapshots, you can see what has changed over time, helping you to pinpoint potential memory leaks.
