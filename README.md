@@ -140,7 +140,26 @@ In this example it throws integer divison by zero , select the exception and sta
 
 ![image](image/img8.png)
 
+![image](image/img9.PNG)
+
 ### **Conditional, Hit Count, and Filter Breakpoints**
+
+Visual Studio provides powerful features for controlling breakpoints, which are essential in debugging. These features include conditional breakpoints, hit count breakpoints, and filter breakpoints.
+
+**1. Conditional Breakpoints**: A conditional breakpoint is only triggered when a specified condition is met. For example, you can set a breakpoint to be hit only when a certain variable equals a particular value. To set a conditional breakpoint:
+
+* Right-click on an existing breakpoint (the red dot in the left margin).
+* Select "Conditions".
+* Choose either "Conditional Expression" or "Hit Count" (explained below) and enter the appropriate condition.
+* Click "Close".
+
+Hit Count Breakpoints: A hit count breakpoint is a type of conditional breakpoint that only triggers when it has been hit a specified number of times. This can be useful in situations such as when you're working with loops or recurring method calls. To set a hit count breakpoint:
+
+Right-click on an existing breakpoint.
+Select "Conditions".
+Choose "Hit Count" and then specify the count condition (for example, break when the hit count is "equal to" a certain number, "a multiple of" a certain number, etc.).
+Click "Close".
+
 ### **Pinning DataTips**
 ### **Parallel Stacks window**
 ### **Show External Code**
