@@ -343,6 +343,8 @@ Here's a brief guide on how to use the integrated CPU profiling:
 
 In the CPU Usage tool's results, you'll see a timeline of CPU usage, and a list of functions sorted by their CPU usage. You can explore this data to identify areas of high CPU usage. Clicking on a function will show you its "Caller/Callee" view, where you can see which functions called this function, and which functions it called, along with their CPU usage.
 
+![image](image/img22.PNG)
+
 ### **Integrated Memory Profiling**
 
 Visual Studio provides an integrated Memory Profiler, which is part of its Performance Profiler tools. The Memory Profiler tool allows you to investigate memory usage in your applications, helping you to identify any potential memory leaks or areas of inefficient memory use.
@@ -350,9 +352,11 @@ Visual Studio provides an integrated Memory Profiler, which is part of its Perfo
 Here's how to use the integrated Memory Profiling:
 
 * **Open the Performance Profiler**: Go to "Debug" -> "Performance Profiler..." or use the shortcut Alt + F2.
-* **Choose .NET Memory Tool**: In the Performance Profiler, ensure the ".NET Memory" tool is selected. Note that this tool is only applicable for .NET applications.
+* **Choose .NET Memory Tool**: In the Performance Profiler, ensure the "Memory Usage" tool is selected.
 * **Start Profiling**: Click "Start" to run your application and begin profiling. Use your application as you normally would, particularly focusing on actions you suspect may cause high memory usage or memory leaks.
 * **Take Snapshots**: While your application is running, you can take memory snapshots at any point by clicking on "Take snapshot" in the Performance Profiler. These snapshots capture the state of the managed heap, letting you analyze memory usage in detail.
 * **Stop Profiling**: Once you have finished, stop your application or click "Stop collection" in the Performance Profiler. Visual Studio will then process the profiling data and display the results.
 
 The Memory Profiler will provide a graphical representation of memory usage over time. Snapshots taken during the profiling session can be examined in detail to review the objects present on the heap and the memory they are consuming. By comparing two snapshots, you can see what has changed over time, helping you to pinpoint potential memory leaks.
+
+![image](image/img23.PNG)
